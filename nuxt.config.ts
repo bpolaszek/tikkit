@@ -21,9 +21,9 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Mölkky Score Counter',
-      short_name: 'Mölkky',
-      description: 'A PWA to count scores in Mölkky games',
+      name: 'Tikkit',
+      short_name: 'Tikkit',
+      description: 'An app to count scores in Mölkky games',
       theme_color: '#ffffff',
       icons: [
         {
@@ -40,7 +40,7 @@ export default defineNuxtConfig({
           src: 'pwa-icons/icon-512x512.png',
           sizes: '512x512',
           type: 'image/png',
-          purpose: 'any'  
+          purpose: 'any'
         },
         {
           src: 'pwa-icons/maskable-icon-512x512.png',
