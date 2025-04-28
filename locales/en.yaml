@@ -1,0 +1,7 @@
+welcome: Welcome to our site
+navigation:
+  home: Home
+  about: About
+  contact: Contact
+messages:
+  hello: Hello, {name}!
