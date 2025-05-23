@@ -44,10 +44,10 @@
           class="w-16 h-16 rounded-full text-lg font-bold transition-all flex items-center justify-center"
           :class="{
             'bg-wood text-forest-dark': !fallenPins.includes(pin),
-            'bg-wood-light text-wood-dark opacity-50': fallenPins.includes(pin)
+            'bg-wood-light text-wood-dark opacity-50 border border-gray-400': fallenPins.includes(pin)
           }"
         >
-          {{ pin }}
+          <span v-show="fallenPins.length < 2">{{ pin }}</span>
         </button>
       </div>
 
@@ -130,12 +130,12 @@ function validateTurn() {
     const previousPlayer = currentPlayer.value
     const previousScore = previousPlayer.score
     playersStore.updateScore(calculateScore.value)
-    
+
     // Show notification if the game hasn't been won
     if (!playersStore.gameWinner && previousPlayer.score !== previousScore) {
       showScoreNotification(previousPlayer, previousPlayer.score)
     }
-    
+
     fallenPins.value = []
   }
 }
