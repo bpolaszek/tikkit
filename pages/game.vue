@@ -2,9 +2,9 @@
   <div>
     <!-- Score Notification -->
     <div
-      v-if="showNotification"
-      class="fixed top-4 right-4 bg-forest-light text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-500"
-      :class="{ 'opacity-0': notificationFading }"
+        v-if="showNotification"
+        class="fixed top-4 right-4 bg-forest-light text-white px-6 py-3 rounded-lg shadow-lg transition-opacity duration-500"
+        :class="{ 'opacity-0': notificationFading }"
     >
       {{ notificationMessage }}
     </div>
@@ -15,8 +15,8 @@
         <h2 class="text-3xl font-bold text-center mb-4">🎉 Winner! 🎉</h2>
         <p class="text-xl text-center mb-6">{{ playersStore.gameWinner.name }} has won the game!</p>
         <button
-          @click="playersStore.resetGame()"
-          class="w-full bg-forest-light text-white py-3 px-6 rounded-lg font-semibold hover:bg-forest transition-colors"
+            @click="playersStore.resetGame()"
+            class="w-full bg-forest-light text-white py-3 px-6 rounded-lg font-semibold hover:bg-forest transition-colors"
         >
           Start New Game
         </button>
@@ -38,12 +38,12 @@
       <!-- Pins Grid -->
       <div class="grid grid-cols-4 gap-3">
         <button
-          v-for="pin in 12"
-          :key="pin"
-          @click="togglePin(pin)"
-          class="w-16 h-16 rounded-full text-lg font-bold transition-all flex items-center justify-center"
-          :class="{
-            'bg-wood text-forest-dark': !fallenPins.includes(pin),
+            v-for="pin in 12"
+            :key="pin"
+            @click="togglePin(pin)"
+            class="w-16 h-16 rounded-full text-lg font-bold transition-all flex items-center justify-center"
+            :class="{
+            'bg-wood-dark text-white': !fallenPins.includes(pin),
             'bg-wood-light text-wood-dark opacity-50 border border-gray-400': fallenPins.includes(pin)
           }"
         >
@@ -54,24 +54,19 @@
       <!-- Action Buttons -->
       <div class="flex gap-4 mt-4">
         <button
-          @click="cancelTurn"
-          class="flex-1 py-3 rounded-lg font-semibold transition-colors"
-          :class="{
+            @click="cancelTurn"
+            class="flex-1 py-3 rounded-lg font-semibold transition-colors"
+            :class="{
             'bg-red-500 text-white hover:bg-red-600': fallenPins.length > 0,
             'bg-gray-200 text-gray-400 cursor-not-allowed': fallenPins.length === 0
           }"
-          :disabled="fallenPins.length === 0"
+            :disabled="fallenPins.length === 0"
         >
           Cancel
         </button>
         <button
-          @click="validateTurn"
-          class="flex-1 py-3 rounded-lg font-semibold transition-colors"
-          :class="{
-            'bg-green-500 text-white hover:bg-green-600': fallenPins.length > 0,
-            'bg-gray-200 text-gray-400 cursor-not-allowed': fallenPins.length === 0
-          }"
-          :disabled="fallenPins.length === 0"
+            @click="validateTurn"
+            class="flex-1 py-3 rounded-lg font-semibold transition-colors bg-green-500 text-white hover:bg-green-600"
         >
           Validate ({{ calculateScore }} points)
         </button>
@@ -126,18 +121,16 @@ function showScoreNotification(player: any, newScore: number) {
 }
 
 function validateTurn() {
-  if (fallenPins.value.length > 0) {
-    const previousPlayer = currentPlayer.value
-    const previousScore = previousPlayer.score
-    playersStore.updateScore(calculateScore.value)
+  const previousPlayer = currentPlayer.value
+  const previousScore = previousPlayer.score
+  playersStore.updateScore(calculateScore.value)
 
-    // Show notification if the game hasn't been won
-    if (!playersStore.gameWinner && previousPlayer.score !== previousScore) {
-      showScoreNotification(previousPlayer, previousPlayer.score)
-    }
-
-    fallenPins.value = []
+  // Show notification if the game hasn't been won
+  if (!playersStore.gameWinner && previousPlayer.score !== previousScore) {
+    showScoreNotification(previousPlayer, previousPlayer.score)
   }
+
+  fallenPins.value = []
 }
 
 function cancelTurn() {
